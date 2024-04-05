@@ -71,7 +71,7 @@ func (route *Route) Handle() http.Handler {
 		// Check if there's a header of the type we need.
 		service, actionName := parseAction(r.Header.Get("SOAPAction"))
 		if service == "" || actionName == "" || r.Method != "POST" {
-			printError(w, "WiiSOAP can't handle this. Try again later.")
+			printError(w, "WiiSOAP can't handle this. Try again later. (Service or actionName blank or method is not 'POST')")
 			return
 		}
 
@@ -104,7 +104,7 @@ func (route *Route) Handle() http.Handler {
 
 		// Action is only properly populated if we found it previously.
 		if action.ActionName == "" && action.ServiceType == "" {
-			printError(w, "WiiSOAP can't handle this. Try again later.")
+			printError(w, "WiiSOAP can't handle this. Try again later. (ActionName and ServiceType blank)")
 			return
 		}
 
